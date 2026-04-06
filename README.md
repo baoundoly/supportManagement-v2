@@ -9,7 +9,7 @@ A full-featured enterprise support management system with integrated ticketing, 
 | Frontend | React 18, TypeScript, Tailwind CSS, Vite |
 | Backend | ASP.NET Core Web API (.NET 10), Clean Architecture |
 | Real-time | SignalR |
-| Database | PostgreSQL (via EF Core 9) |
+| Database | MySQL 8+ (via EF Core 9 + Pomelo) |
 | Authentication | JWT + Refresh Tokens |
 | File Storage | Local filesystem |
 | Reporting | Built-in dashboard + Excel (ClosedXML) + PDF (iText7) export |
@@ -32,7 +32,7 @@ A full-featured enterprise support management system with integrated ticketing, 
 
 - .NET 10 SDK
 - Node.js 18+
-- PostgreSQL 15+
+- MySQL 8.0+
 
 ### Backend Setup
 
@@ -40,7 +40,7 @@ A full-featured enterprise support management system with integrated ticketing, 
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Host=localhost;Port=5432;Database=SupportManagement;Username=postgres;Password=postgres"
+       "DefaultConnection": "Server=localhost;Port=3306;Database=SupportManagement;User=root;Password=root;"
      }
    }
    ```

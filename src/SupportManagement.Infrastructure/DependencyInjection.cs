@@ -18,7 +18,10 @@ public static class DependencyInjection
     {
         // Database
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 36)));
+        });
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
