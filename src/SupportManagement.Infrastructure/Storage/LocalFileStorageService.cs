@@ -33,7 +33,7 @@ public class LocalFileStorageService : IFileStorageService
         var filePath = Path.Combine(folder, storedFileName);
         var fullPath = Path.Combine(_uploadPath, filePath);
 
-        await using var fileOutputStream = File.Create(fullPath);
+        await using var fileOutputStream = new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 4096, useAsync: true);
         await fileStream.CopyToAsync(fileOutputStream, cancellationToken);
 
         return (storedFileName, filePath);

@@ -23,8 +23,12 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
         // JWT
-        var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? new JwtSettings();
-        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        var jwtSection = configuration.GetSection("JwtSettings");
+        var jwtSettings = jwtSection.Get<JwtSettings>();
+        if (jwtSettings is null || string.IsNullOrWhiteSpace(jwtSettings.SecretKey))
+            throw new InvalidOperationException("JWT configuration is missing or invalid. Ensure 'JwtSettings:SecretKey' is configured.");
+
+        services.Configure<JwtSettings>(jwtSection);
         services.AddScoped<ITokenService, TokenService>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

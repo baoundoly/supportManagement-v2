@@ -8,6 +8,7 @@ namespace SupportManagement.Infrastructure.Services;
 
 public class ReportService
 {
+    private const int SubjectMaxLength = 40;
     public byte[] GenerateTicketExcel(List<TicketSummaryDto> tickets)
     {
         using var workbook = new XLWorkbook();
@@ -63,7 +64,7 @@ public class ReportService
         foreach (var t in tickets)
         {
             table.AddCell(t.TicketNo);
-            table.AddCell(t.Subject.Length > 40 ? t.Subject[..40] + "..." : t.Subject);
+            table.AddCell(t.Subject.Length > SubjectMaxLength ? t.Subject[..SubjectMaxLength] + "..." : t.Subject);
             table.AddCell(t.Priority.ToString());
             table.AddCell(t.Status.ToString());
             table.AddCell(t.CreatedAt.ToString("yyyy-MM-dd"));
