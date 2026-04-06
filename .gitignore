@@ -1,0 +1,22 @@
+# .NET
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+*.nupkg
+
+# Node.js / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Local uploads folder (generated at runtime)
+src/SupportManagement.API/uploads/
+
+# Logs
+*.log
+
+# Environment specific
+appsettings.Local.json
+appsettings.*.local.json
